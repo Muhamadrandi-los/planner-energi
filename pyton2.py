@@ -1,5 +1,14 @@
 import streamlit as st
 import pandas as pd
+import base64
+
+# ================= FUNGSI BACA GAMBAR =================
+def get_base64_image(file_path):
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+# ================= LOAD BACKGROUND =================
+bg_image = get_base64_image("WhatsApp Image 2026-01-08 at 10.04.39.jpeg")
 
 # ================= PAGE CONFIG =================
 st.set_page_config(
@@ -7,6 +16,37 @@ st.set_page_config(
     layout="wide",
     page_icon="⚡"
 )
+
+# ================= BACKGROUND CSS =================
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/jpeg;base64,{bg_image}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }}
+
+    section[data-testid="stSidebar"] {{
+        background: rgba(255,255,255,0.88);
+    }}
+
+    div.block-container {{
+        background: rgba(255,255,255,0.88);
+        padding: 2rem;
+        border-radius: 20px;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# ================= ISI APLIKASI =================
+st.title("⚡ Dashboard PLTS")
+st.success("Background WhatsApp Image berhasil dimuat 🔥")
+
+
 
 # ================= HEADER =================
 st.markdown("""
